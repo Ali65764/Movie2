@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import NavBar from '../pages/NavBar'
-import bgimage from "../assets/batman.jpg"
+import React, { useState, useEffect } from 'react';
+import NavBar from '../pages/NavBar';
+import bgimage from "../assets/batman.jpg";
 import { GetMovies, GetSingleMovie, GetSearch } from '../api/Request';
 import { Link } from 'react-router-dom';
-import { ROUTER } from "../constant/router"
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { ROUTER } from "../constant/router";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
-import EyeModal from "../Modal/EyeModal"
+import EyeModal from "../Modal/EyeModal";
 import Search from '../search/search';
 import Footer from '../pages/Footer';
 import { useGlobalContext } from '../contexts/GlobalContext';
-export default function Home() {
 
+export default function Home() {
   const {
     addWatchMovie,
     isInMovie,
-    setMovies,
+    setMovies 
   } = useGlobalContext();
 
-
-
-
   const [notFound, setNotFound] = useState(false);
-  const [movies, setLocalMovies] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
+  const [movies, setLocalMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -33,7 +29,7 @@ export default function Home() {
     try {
       const response = await GetMovies();
       if (response && response.Search) {
-        setMovies(response.Search)
+        setMovies(response.Search);
         setLocalMovies(response.Search);
         setNotFound(false);
       }
@@ -65,6 +61,7 @@ export default function Home() {
     try {
       const response = await GetSearch(term);
       if (response && response.Search) {
+        setMovies(response.Search);
         setLocalMovies(response.Search);
         setNotFound(false);
       } else {
@@ -78,7 +75,7 @@ export default function Home() {
 
   const resetSearch = () => {
     fetchData();
-    setSearchTerm(' ')
+    setSearchTerm(' ');
   }
 
   useEffect(() => {
@@ -93,26 +90,21 @@ export default function Home() {
     <>
       <NavBar />
       <div className="group relative bg-cover h-[400px] md:h-[550px]">
-  <img 
-    src={bgimage} 
-    alt="batman" 
-    className="h-full w-full object-cover" 
-  />
-  <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-gegared dark:to-blue-900">
-    <div className="px-4 md:px-8 lg:pl-40 md:pl-0 mb-6 w-full md:w-[700px] lg:w-[900px] group-hover:mb-20 transition-all duration-1000">
-      <p className="text-lightpink group-hover:mb-1 transition duration-1000 dark:text-lightgreen text-sm md:text-base lg:text-lg">
-        Action, Drama, Thriller, Horror
-      </p>
-      <p className="text-2xl md:text-4xl lg:text-6xl text-lightblue">
-        Join Us
-      </p>
-      <p className="text-lightblue mt-4 text-xs md:text-sm lg:text-base">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat at cumque maiores non consequatur veniam nesciunt mollitia! Sapiente culpa deleniti quis quam nam voluptas id, accusamus iure quisquam, officiis debitis iusto earum laudantium alias harum ad neque dolor ipsa non? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed hic culpa incidunt eveniet, reiciendis aperiam nihil nulla veniam maxime mollitia expedita natus cupiditate accusamus voluptas quasi dolore soluta consequuntur quaerat!
-      </p>
-    </div>
-  </div>
-</div>
-
+        <img src={bgimage} alt="batman" className="h-full w-full object-cover" />
+        <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-gegared dark:to-blue-900">
+          <div className="px-4 md:px-8 lg:pl-40 md:pl-0 mb-6 w-full md:w-[700px] lg:w-[900px] group-hover:mb-20 transition-all duration-1000">
+            <p className="text-lightpink group-hover:mb-1 transition duration-1000 dark:text-lightgreen text-sm md:text-base lg:text-lg">
+              Action, Drama, Thriller, Horror
+            </p>
+            <p className="text-2xl md:text-4xl lg:text-6xl text-lightblue">
+              Join Us
+            </p>
+            <p className="text-lightblue mt-4 text-xs md:text-sm lg:text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat at cumque maiores non consequatur veniam nesciunt mollitia! Sapiente culpa deleniti quis quam nam voluptas id, accusamus iure quisquam, officiis debitis iusto earum laudantium alias harum ad neque dolor ipsa non? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed hic culpa incidunt eveniet, reiciendis aperiam nihil nulla veniam maxime mollitia expedita natus cupiditate accusamus voluptas quasi dolore soluta consequuntur quaerat!
+            </p>
+          </div>
+        </div>
+      </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} resetSearch={resetSearch} />
 
