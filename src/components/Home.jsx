@@ -8,7 +8,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import EyeModal from "../Modal/EyeModal";
-import Search from '../search/search';
+import Search from '../search/Search';
 import Footer from '../pages/Footer';
 import { useGlobalContext } from '../contexts/GlobalContext';
 
