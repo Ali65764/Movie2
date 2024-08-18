@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import NavBar from '../pages/NavBar';
 import Footer from '../pages/Footer';
-import Search from '../search/search';
+import Search from '../search/Search';
 
 
 function WatchList() {
